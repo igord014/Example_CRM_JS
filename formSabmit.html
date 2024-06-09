@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+        /* Класс для скрытия элемента */
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <form id="myForm">
+            <!-- Форма с идентификатором myForm -->
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <!-- Метка для поля ввода username -->
+                <input type="text" class="form-control" id="username" name="username">
+                <!-- Поле ввода текста с идентификатором и именем username, с классом Bootstrap form-control -->
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <!-- Метка для поля ввода password -->
+                <input type="password" class="form-control" id="password" name="password">
+                <!-- Поле ввода пароля с идентификатором и именем password, с классом Bootstrap form-control -->
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <!-- Метка для выпадающего списка gender -->
+                <select class="form-control" id="gender" name="gender">
+                    <!-- Выпадающий список с идентификатором и именем gender, с классом Bootstrap form-control -->
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                    <!-- Опции выпадающего списка с различными значениями -->
+                </select>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="newsletter" name="newsletter">
+                <!-- Чекбокс с идентификатором и именем newsletter, с классом Bootstrap form-check-input -->
+                <label class="form-check-label" for="newsletter">Subscribe to newsletter:</label>
+                <!-- Метка для чекбокса подписки на новости, с классом Bootstrap form-check-label -->
+            </div>
+            <div id="emailField" class="form-group hidden">
+                <!-- Дополнительное поле ввода email, изначально скрытое благодаря классу hidden -->
+                <label for="email">Email:</label>
+                <!-- Метка для поля ввода email -->
+                <input type="email" class="form-control" id="email" name="email">
+                <!-- Поле ввода email с идентификатором и именем email, с классом Bootstrap form-control -->
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <!-- Кнопка отправки формы с классом Bootstrap btn btn-primary -->
+        </form>
+
+        <div id="output" class="mt-5"></div>
+        <!-- Контейнер для вывода данных формы, с отступом сверху (класс mt-5) -->
+    </div>
+
+    <!-- Подключение jQuery и Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Обработчик события изменения состояния чекбокса подписки на новости
+        document.getElementById('newsletter').addEventListener('change', function() {
+            const emailField = document.getElementById('emailField');
+            // Получаем элемент поля ввода email
+            if (this.checked) {
+                emailField.classList.remove('hidden');
+                // Если чекбокс отмечен, убираем класс hidden, чтобы показать поле email
+            } else {
+                emailField.classList.add('hidden');
+                // Если чекбокс снят, добавляем класс hidden, чтобы скрыть поле email
+            }
+        });
+
+        // Обработчик события отправки формы
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Предотвращаем стандартное поведение формы (отправка данных на сервер)
+            
+            // Получаем значения всех полей формы
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const gender = document.getElementById('gender').value;
+            const newsletter = document.getElementById('newsletter').checked;
+            const email = newsletter ? document.getElementById('email').value : 'N/A';
+            // Если чекбокс подписки отмечен, получаем значение email, иначе задаем 'N/A'
+
+            // Создаем строку с данными формы для вывода
+            const output = `
+                <h2>Form Data</h2>
+                <p><strong>Username:</strong> ${username}</p>
+                <p><strong>Password:</strong> ${password}</p>
+                <p><strong>Gender:</strong> ${gender}</p>
+                <p><strong>Subscribed to Newsletter:</strong> ${newsletter ? 'Yes' : 'No'}</p>
+                <p><strong>Email:</strong> ${email}</p>
+            `;
+
+            // Выводим данные формы в контейнер с id="output"
+            document.getElementById('output').innerHTML = output;
+        });
+    </script>
+</body>
+</html>
