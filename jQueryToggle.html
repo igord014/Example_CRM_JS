@@ -118,14 +118,23 @@
         // Привязываем обработчик события клика к кнопке
         $("#toggleButton").click(function () {
           // По клику на кнопку выполняется следующая функция
-
-          // Скрываем или отображаем элемент в зависимости от его текущего состояния
+       
+              
           $("#content").toggle();
-          // $('#contentTwo').toggleClass('hidden');
-          //$('#contentTree').toggleClass('hidden');
+           //-------------------------------------------
+            // alert
+          //alert("YOU CLICKED INFOR BUTTON")
+          //---------------------------------
+          
           $("p:nth-of-type(3)").toggleClass("highlight");
         });
-
+        $(document).click(function (event) {
+            // Проверяем, был ли клик вне элемента 'content' и кнопки 'toggleButton'
+            if (!$(event.target).closest("#content, #toggleButton").length) {
+              // Если клик был вне этих элементов, скрываем 'content'
+              $("#content").hide();
+            }
+          });
         $("#contentTwo").css("border", "solid 3px black");
         $("h2 + p").css("border", "solid 3px red");
         $("h2").css("border", "solid 3px blue");
