@@ -1,3 +1,4 @@
+<!--  ctrl+h rename -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,16 +8,15 @@
     <!-- Подключение jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
-      * {
-        height: fit-content;
-      }
       body {
         background-color: aqua;
+      }
+      p {
+        display: inline;
       }
       .hidden {
         display: none;
       }
-      /* Стили для скрытия элемента */
       .contain {
         position: relative;
         display: flex;
@@ -27,7 +27,6 @@
         margin: 0; /* Выравнивание по центру */
       }
       #toggleButton {
-        align-self: flex-start;
         margin-bottom: 10px;
         background-color: rgb(220, 199, 241);
         border-radius: 3px;
@@ -40,7 +39,7 @@
       }
       textarea {
         width: 50%;
-       
+
         text-align: left;
         padding: 10px;
         background-color: bisque;
@@ -51,29 +50,40 @@
         padding: 5px;
       }
       p {
-        width: fit-content;
         margin: 10px;
       }
       .highlight {
         background-color: rgb(241, 139, 22);
+      }
+      .forPi {
+        display: grid;
+
+        margin-top: 10px;
+        justify-content: start;
+      }
+      .highlight-border {
+        border: solid 3px rgb(56, 20, 122);
+      }
+      .greeding {
+        border: 2px solid black;
       }
     </style>
   </head>
   <body>
     <div class="contain">
       <button id="toggleButton" class="btn btn-primary">Toggle Element</button>
-      <!-- Кнопка для переключения отображения элемента -->
       <div id="textareaContainer">
-        <textarea id="content" class="form-control" rows="30"  style="fit-content;" >
+        <textarea
+          id="content"
+          class="form-control"
+          rows="10"
+          style="height: fit-content"
+        >
 Я сидел на скамейке под старым дубом и наслаждался прохладной тенью его могучих ветвей. Мимо проходили прохожие, каждый со своими заботами и мыслями. Молодая пара, держась за руки, обсуждала планы на будущее, а пожилая женщина, улыбаясь, вспоминала, как водила сюда своих детей.
 
 Вдали слышался звон колоколов – в церкви началась вечерняя служба. Звуки перезвона накрывали город, словно невидимое покрывало, придавая особую атмосферу этому летнему вечеру.
             
- На озере неподалеку плавали лебеди, величаво скользя по поверхности воды. Они, казалось, были в своем собственном мире, не обращая внимания на людей, которые с восхищением наблюдали за их грацией.
-            
- Яркие цветы, высаженные вдоль аллей, радовали глаз своими красками. Пчелы жужжали, собирая нектар, а бабочки порхали над цветами, добавляя еще больше жизни этому уголку природы.
-            
- Постепенно вечерело, и небо начинало менять свои оттенки – от голубого к оранжевому, а затем к пурпурному. Этот момент перехода был поистине волшебным, напоминая о вечной смене дня и ночи.
+ 
             
         </textarea>
       </div>
@@ -81,64 +91,101 @@
       <textarea
         id="contentTwo"
         class="form-control"
-        
-        style="background-color: rgb(240, 232, 232)" height: fit-content rows="50"
+        style="background-color: rgb(240, 232, 232); height: fit-content"
+        rows="20"
       >
-       
-Лето выдалось необычайно жарким. Воздух, прогретый до тридцати градусов, напоминал густой сироп, которым было трудно дышать. В городском парке, несмотря на палящее солнце, раздавался смех детей, играющих у фонтана. Вода брызгала в стороны, создавая радугу, которая ненадолго украшала небосвод.
-
-Я сидел на скамейке под старым дубом и наслаждался прохладной тенью его могучих ветвей. Мимо проходили прохожие, каждый со своими заботами и мыслями. Молодая пара, держась за руки, обсуждала планы на будущее, а пожилая женщина, улыбаясь, вспоминала, как водила сюда своих детей.
-
-Вдали слышался звон колоколов – в церкви началась вечерняя служба. Звуки перезвона накрывали город, словно невидимое покрывало, придавая особую атмосферу этому летнему вечеру.
-
-На озере неподалеку плавали лебеди, величаво скользя по поверхности воды. Они, казалось, были в своем собственном мире, не обращая внимания на людей, которые с восхищением наблюдали за их грацией.
-
-Яркие цветы, высаженные вдоль аллей, радовали глаз своими красками. Пчелы жужжали, собирая нектар, а бабочки порхали над цветами, добавляя еще больше жизни этому уголку природы.
-
-Постепенно вечерело, и небо начинало менять свои оттенки – от голубого к оранжевому, а затем к пурпурному. Этот момент перехода был поистине волшебным, напоминая о вечной смене дня и ночи.
-
-Люди начинали расходиться, паркуя свои велосипеды и собираясь в группы для обсуждения прожитого дня. Звуки шагов и голосов заполняли пространство, но это был приятный шум, свидетельствующий о жизни и движении.
-
-    </textarea
-      >
+             
+      Лето выдалось необычайно жарким. Воздух, прогретый до тридцати градусов, напоминал густой сироп, которым было трудно дышать. В городском парке, несмотря на палящее солнце, раздавался смех детей, играющих у фонтана. Вода брызгала в стороны, создавая радугу, которая ненадолго украшала небосвод.
+      
+      Я сидел на скамейке под старым дубом и наслаждался прохладной тенью его могучих ветвей. Мимо проходили прохожие, каждый со своими заботами и мыслями. Молодая пара, держась за руки, обсуждала планы на будущее, а пожилая женщина, улыбаясь, вспоминала, как водила сюда своих детей.
+      
+      Вдали слышался звон колоколов – в церкви началась вечерняя служба. Звуки перезвона накрывали город, словно невидимое покрывало, придавая особую атмосферу этому летнему вечеру.
+      
+      На озере неподалеку плавали лебеди, величаво скользя по поверхности воды. Они, казалось, были в своем собственном мире, не обращая внимания на людей, которые с восхищением наблюдали за их грацией.
+      
+      
+      </textarea>
     </div>
+
     <h2 style="display: block; width: fit-content; height: fit-content">
       redy
     </h2>
-    <p>highlighted tag</p>
-    <p>highlighted tag</p>
-    <p>highlighted tag</p>
-    <p>highlighted tag</p>
-    <p>highlighted tag</p>
+    <div class="forPi">
+      <p>1 tag</p>
+      <p>2 tag</p>
+      <p>3 tag</p>
+      <p>4 tag</p>
+      <p>5 tag</p>
+    </div>
+    <form action="#">
+      <label for="username">User name:</label>
+      <input type="text" placeholder="enter name" />
+      <span id="enterName"></span>
+      <h5>Hi <span id="greeding"></span></h5>
+
+      <label for="userFamily">User Family:</label>
+      <input type="text" placeholder="enter family" id="nm" />
+      <span id="enterFamily"></span>
+    </form>
 
     <script>
+      //сначала грузим страницу-------------------------
       $(document).ready(function () {
-        // При загрузке документа (DOM) jQuery готов к использованию
+        //при клике на кнопку показать что-то и при втором клике убрать это же
+        $("#content").hide();
+        $("h2").hide();
 
-        // Привязываем обработчик события клика к кнопке
         $("#toggleButton").click(function () {
-          // По клику на кнопку выполняется следующая функция
-       
-              
           $("#content").toggle();
-           //-------------------------------------------
-            // alert
-          //alert("YOU CLICKED INFOR BUTTON")
-          //---------------------------------
-          
-          $("p:nth-of-type(3)").toggleClass("highlight");
+          $("h2").toggle();
+          $(".forPi p:lt(2)").toggle();
+          $("p:nth-of-type(5)").toggleClass("highlight-border");
+          $("h2").toggleClass("highlight-border");
+
+          $(".forPi").toggleClass("highlight-border");
+          $(".forPi").toggleClass("highlight");
+          //$(".forPi p:nth-of-type(2)").toggleClass("highlight-border")
+          $(".forPi p:lt(2)").toggleClass("highlight-border");
         });
+        //-------Клик в сторону------------------
         $(document).click(function (event) {
-            // Проверяем, был ли клик вне элемента 'content' и кнопки 'toggleButton'
-            if (!$(event.target).closest("#content, #toggleButton").length) {
-              // Если клик был вне этих элементов, скрываем 'content'
-              $("#content").hide();
-            }
-          });
+          if (!$(event.target).closest("#content, #toggleButton").length) {
+            $("#content").hide();
+            $("h2").hide();
+            $(".forPi p:nth-of-type(1)").css("border", "solid 3px blue").hide();
+            $(".forPi").removeClass("highlight");
+            $(".forPi").removeClass("highlight-border");
+          }
+        });
+        //--------------------------------------
+        // навести и убрать мышку
+        $("p:nth-of-type(5)").mouseenter(function () {
+          $(this).toggleClass("highlight");
+        });
+        $("p:nth-of-type(5)").mouseleave(function () {
+          $(this).toggleClass("highlight");
+        });
+        //----присваиваем элементу стиль
         $("#contentTwo").css("border", "solid 3px black");
-        $("h2 + p").css("border", "solid 3px red");
-        $("h2").css("border", "solid 3px blue");
-        $("p:nth-of-type(3)").css("border", "solid 3px black");
+        // $(".forPi").css("border", "solid 3px black");
+        $("p:nth-of-type(4)").css({
+          border: "solid 3px red",
+          "background-color": "yellow",
+          display: "inline-block",
+        });
+        //-при потере фокуса, то есть после того как вёл имя появляется "Hi Igor, enter family"
+
+        $("input").change(function () {
+          $("#greeding").text($(this).val() + " , Enter family");
+        });
+
+        $("input").focus(function () {
+          $("#enterName").text("please enter name");
+        });
+        //если щелчок в поле  появляется "please enter family"
+        $("#nm").focus(function () {
+          $("#enterFamily").text("please enter family");
+        });
       });
     </script>
   </body>
