@@ -48,6 +48,10 @@
       h2 {
         margin: 10px;
         padding: 5px;
+        cursor: pointer;
+        border: 2px solid black;
+        border-radius: 3px;
+        background-color: rgb(169, 169, 233);
       }
       p {
         margin: 10px;
@@ -57,6 +61,7 @@
       }
       .forPi {
         display: grid;
+        margin-bottom: 20px;
 
         margin-top: 10px;
         justify-content: start;
@@ -108,7 +113,9 @@
     </div>
 
     <h2 style="display: block; width: fit-content; height: fit-content">
-      redy
+      Лето выдалось необычайно жарким. Воздух, прогретый до тридцати градусов,
+      напоминал густой сироп, которым было трудно дышать. В городском парке,
+      несмотря на палящее солнце, раздавался смех детей
     </h2>
     <div class="forPi">
       <p>1 tag</p>
@@ -127,23 +134,37 @@
       <input type="text" placeholder="enter family" id="nm" />
       <span id="enterFamily"></span>
     </form>
+    <h3>
+      <img id="robot" src="roboy.png" alt="robot" width="300" height="300" />
+    </h3>
+    <h3>
+      <img
+        id="robotIntree"
+        src="robotIntree.png"
+        alt="robotIntree"
+        width="300"
+        height="300"
+        display = 'none';
+      />
+    </h3>
 
     <script>
       //сначала грузим страницу-------------------------
       $(document).ready(function () {
         //при клике на кнопку показать что-то и при втором клике убрать это же
         $("#content").hide();
-        $("h2").hide();
 
         $("#toggleButton").click(function () {
           $("#content").toggle();
-          $("h2").toggle();
+          $("#content").delay(5000).hide(10000).show(5000);
+
           $(".forPi p:lt(2)").toggle();
-          $("p:nth-of-type(5)").toggleClass("highlight-border");
+
           $("h2").toggleClass("highlight-border");
 
           $(".forPi").toggleClass("highlight-border");
           $(".forPi").toggleClass("highlight");
+          $(".forPi").animate({ width: "200px" }, 5000);
           //$(".forPi p:nth-of-type(2)").toggleClass("highlight-border")
           $(".forPi p:lt(2)").toggleClass("highlight-border");
         });
@@ -151,7 +172,7 @@
         $(document).click(function (event) {
           if (!$(event.target).closest("#content, #toggleButton").length) {
             $("#content").hide();
-            $("h2").hide();
+            //$("h2").hide();
             $(".forPi p:nth-of-type(1)").css("border", "solid 3px blue").hide();
             $(".forPi").removeClass("highlight");
             $(".forPi").removeClass("highlight-border");
@@ -186,7 +207,26 @@
         $("#nm").focus(function () {
           $("#enterFamily").text("please enter family");
         });
+
+        $("input").attr("title", "Введите имя");
+        $("#nm").attr("title", "Введите фамилию");
+        $("h2").click(function () {
+          $("h2").fadeOut(2000).delay(2000).fadeIn(2000, fadeAndShow);
+        });
+        // непрерывный показ и скрытие текста-------
+        function fadeAndShow() {
+          $("h2").fadeOut(5000).delay(1000).fadeIn(5000, fadeAndShow);
+        }
+        fadeAndShow(); // Здесь мы просто вызываем функцию после её определения
+        //-----------change image
+        
+        $("#robot").click(function () {
+          $(this).fadeOut(2000, function () {
+            $(this).attr("src", "robotIntree.png").fadeIn(1000);
+          });
+        });
       });
+      
     </script>
   </body>
 </html>
