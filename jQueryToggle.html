@@ -144,7 +144,7 @@
         alt="robotIntree"
         width="300"
         height="300"
-        display = 'none';
+        display = 'hide';
       />
     </h3>
 
@@ -219,7 +219,7 @@
         }
         fadeAndShow(); // Здесь мы просто вызываем функцию после её определения
         //-----------change image
-        
+        $("#robotIntree").hide();
         $("#robot").click(function () {
           $(this).fadeOut(2000, function () {
             $(this).attr("src", "robotIntree.png").fadeIn(1000);
