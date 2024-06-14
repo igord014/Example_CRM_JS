@@ -25,7 +25,7 @@
 
       .slider-track {
         display: flex;
-        transition: transform 3s linear;
+        transition: transform 3s ease;
       }
 
       .slider-track img {
@@ -90,15 +90,16 @@
         ];
 
         // Duplicate the images to create a seamless loop
-        const loopImages = images.concat(images.slice(0, 3)); // Клонируем первые 3 изображения
+        const loopImages = images.concat(images); // Дублируем все изображения
         $.each(loopImages, function (index, src) {
           const img = $("<img>").attr("src", src);
           sliderTrack.append(img);
         });
 
         let currentIndex = 0;
-        let isPaused = false;
         const totalImages = loopImages.length;
+        const visibleImages = 3; // Количество видимых изображений
+        let isPaused = false;
         let clickCount = 0;
         let timer;
         let sliderInterval = setInterval(moveSlider, 4000);
@@ -108,16 +109,16 @@
           currentIndex++;
           sliderTrack.css(
             "transform",
-            `translateX(-${(100 / 3) * currentIndex}%)`
+            `translateX(-${(100 / visibleImages) * currentIndex}%)`
           );
 
-          if (currentIndex >= totalImages - 3) {
+          if (currentIndex >= totalImages / 2) {
             setTimeout(function () {
               sliderTrack.css("transition", "none");
               sliderTrack.css("transform", "translateX(0)");
               currentIndex = 0;
               setTimeout(function () {
-                sliderTrack.css("transition", "transform 3s linear");
+                sliderTrack.css("transition", "transform 3s ease");
               }, 50);
             }, 3000);
           }
@@ -125,7 +126,7 @@
 
         function resetSliderInterval() {
           clearInterval(sliderInterval);
-          sliderInterval = setInterval(moveSlider, 4000);
+          sliderInterval = setInterval(moveSlider, 5000);
         }
 
         function resetImageEffects() {
@@ -148,10 +149,10 @@
           currentIndex = (currentIndex - 1 + totalImages) % totalImages;
           sliderTrack.css({
             transition: "none",
-            transform: `translateX(-${(100 / 3) * currentIndex}%)`,
+            transform: `translateX(-${(100 / visibleImages) * currentIndex}%)`,
           });
           setTimeout(() => {
-            sliderTrack.css("transition", "transform 3s linear");
+            sliderTrack.css("transition", "transform 3s ease");
           }, 50);
         });
 
@@ -160,10 +161,10 @@
           currentIndex = (currentIndex + 1) % totalImages;
           sliderTrack.css({
             transition: "none",
-            transform: `translateX(-${(100 / 3) * currentIndex}%)`,
+            transform: `translateX(-${(100 / visibleImages) * currentIndex}%)`,
           });
           setTimeout(() => {
-            sliderTrack.css("transition", "transform 3s linear");
+            sliderTrack.css("transition", "transform 3s ease");
           }, 50);
         });
 
