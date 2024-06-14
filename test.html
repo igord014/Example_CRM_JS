@@ -10,6 +10,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
             background-color: #f0f0f0;
         }
@@ -36,13 +37,36 @@
         }
 
         .hover-effect {
-            transform: scale(1.05); /* Увеличение размера на 5% */
+            transform: scale(1.1) rotate(5deg); /* Увеличение размера на 10% и поворот на 5 градусов */
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Более тёмная тень */
             filter: brightness(1.2); /* Увеличение яркости */
         }
 
         img {
-            padding: 10px;
+            padding: 5px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination span {
+            display: block;
+            width: 30px;
+            height: 30px;
+            margin: 0 5px;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            background-color: #ccc;
+            border-radius: 50%;
+        }
+
+        .pagination .active {
+            background-color: #666;
+            color: #fff;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -53,9 +77,13 @@
             <!-- Изображения будут вставляться динамически -->
         </div>
     </div>
+    <div class="pagination">
+        <!-- Нумерация будет вставляться динамически -->
+    </div>
     <script>
         $(document).ready(function () {
             const sliderTrack = $(".slider-track");
+            const pagination = $(".pagination");
             const images = [
                 "image1.png",
                 "robot.png",
@@ -74,13 +102,14 @@
 
             let currentIndex = 0;
             let isPaused = false;
-            const totalImages = loopImages.length;
             let clickCount = 0;
             let timer;
+            const totalImages = loopImages.length;
 
             function moveSlider() {
                 currentIndex++;
                 sliderTrack.css("transform", `translateX(-${(100 / 3) * currentIndex}%)`);
+                updatePagination();
 
                 if (currentIndex >= totalImages - 3) {
                     setTimeout(function () {
@@ -93,6 +122,30 @@
                     }, 3000);
                 }
             }
+
+            function updatePagination() {
+                pagination.children().removeClass("active");
+                const index = currentIndex % images.length;
+                pagination.children().eq(index).addClass("active");
+            }
+
+            $.each(images, function (index) {
+                const pageNum = $("<span>").text(index + 1);
+                pageNum.on("click", function () {
+                    clearInterval(sliderInterval);
+                    currentIndex = index;
+                    sliderTrack.css("transition", "none");
+                    sliderTrack.css("transform", `translateX(-${(100 / 3) * currentIndex}%)`);
+                    setTimeout(function () {
+                        sliderTrack.css("transition", "transform 3s linear");
+                    }, 50);
+                    updatePagination();
+                    sliderInterval = setInterval(moveSlider, 4000);
+                });
+                pagination.append(pageNum);
+            });
+
+            updatePagination();
 
             let sliderInterval = setInterval(moveSlider, 4000);
 
