@@ -13,7 +13,6 @@
         height: 100vh;
         background-color: #f0f0f0;
         position: relative;
-        flex-direction: column;
       }
 
       .slider {
@@ -22,7 +21,6 @@
         overflow: hidden;
         border: 2px solid #ccc;
         background-color: #fff;
-        position: relative;
       }
 
       .slider-track {
@@ -51,8 +49,8 @@
       }
 
       .arrow {
-        position: absolute;
-
+        margin: 20px;
+        top: 50%;
         transform: translateY(-50%);
         background-color: rgba(255, 255, 255, 0.7);
         border: none;
@@ -62,31 +60,11 @@
       }
 
       .arrow-left {
-        left: 100px;
+        left: 10px;
       }
 
       .arrow-right {
-        right: 100px;
-      }
-
-      .dots {
-        display: flex;
-        justify-content: center;
-        margin-top: 50px;
-      }
-
-      .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: rgba(96, 89, 89, 0.216);
-        margin: 0 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      .dot.active {
-        background-color: black;
+        right: 10px;
       }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -99,7 +77,6 @@
       </div>
     </div>
     <button class="arrow arrow-right">&#9654;</button>
-    <div class="dots"></div>
     <script>
       $(document).ready(function () {
         const sliderTrack = $(".slider-track");
@@ -112,22 +89,16 @@
           "robotFour.png",
         ];
 
+        // Duplicate the images to create a seamless loop
         const loopImages = images.concat(images); // Дублируем все изображения
         $.each(loopImages, function (index, src) {
           const img = $("<img>").attr("src", src);
           sliderTrack.append(img);
         });
 
-        const dotsContainer = $(".dots");
-        for (let i = 0; i < images.length; i++) {
-          const dot = $("<div>").addClass("dot");
-          dotsContainer.append(dot);
-        }
-
-        const dots = $(".dot");
         let currentIndex = 0;
         const totalImages = loopImages.length;
-        const visibleImages = 3;
+        const visibleImages = 3; // Количество видимых изображений
         let isPaused = false;
         let clickCount = 0;
         let timer;
@@ -151,13 +122,6 @@
               }, 50);
             }, 3000);
           }
-
-          updateDots();
-        }
-
-        function updateDots() {
-          dots.removeClass("active");
-          dots.eq(currentIndex % images.length).addClass("active");
         }
 
         function resetSliderInterval() {
@@ -190,7 +154,6 @@
           setTimeout(() => {
             sliderTrack.css("transition", "transform 3s ease");
           }, 50);
-          updateDots();
         });
 
         $(".arrow-right").click(function () {
@@ -203,7 +166,6 @@
           setTimeout(() => {
             sliderTrack.css("transition", "transform 3s ease");
           }, 50);
-          updateDots();
         });
 
         sliderTrack.on("click", "img", function (event) {
@@ -225,8 +187,6 @@
             clickCount = 0;
           }, 300);
         });
-
-        updateDots();
       });
     </script>
   </body>
