@@ -211,13 +211,17 @@
           clearTimeout(timer);
           timer = setTimeout(() => {
             if (clickCount === 1) {
-              $(this).toggleClass("hover-effect");
-              if (isPaused) {
-                sliderInterval = setInterval(moveSlider, 4000);
-              } else {
+              const isHovered = $(this).hasClass("hover-effect");
+              resetImageEffects();
+              if (!isHovered) {
+                $(this).addClass("hover-effect");
                 clearInterval(sliderInterval);
+                isPaused = true;
+              } else {
+                $(this).removeClass("hover-effect");
+                sliderInterval = setInterval(moveSlider, 4000);
+                isPaused = false;
               }
-              isPaused = !isPaused;
             } else if (clickCount === 2) {
               const src = $(this).attr("src");
               window.open(src, "_blank");
