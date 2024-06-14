@@ -15,8 +15,8 @@
       }
 
       .slider {
-        width: 100%; /* Устанавливаем ширину контейнера на 100% */
-        max-width: 1200px; /* Ограничиваем максимальную ширину */
+        width: 100%;
+        max-width: 1200px;
         overflow: hidden;
         border: 2px solid #ccc;
         background-color: #fff;
@@ -24,17 +24,18 @@
 
       .slider-track {
         display: flex;
-        transition: transform 0.5s ease;
+        transition: transform 3s ease;
       }
 
       .slider-track img {
-        width: 33.3333%; /* Показываем 3 изображения одновременно */
-        flex-shrink: 0; /* Запрещаем уменьшение ширины изображения */
+        width: 33.3333%;
+        flex-shrink: 0;
         cursor: pointer;
         box-sizing: border-box;
-         }
-         img{
-            padding: 10px;
+      }
+      
+      img {
+        padding: 10px;
       }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -65,7 +66,6 @@
         });
 
         let currentIndex = 0;
-        let sliderInterval;
         let isPaused = false;
 
         function moveSlider() {
@@ -74,10 +74,15 @@
             currentIndex = 0;
             sliderTrack.css("transition", "none");
             sliderTrack.css("transform", "translateX(0)");
-            setTimeout(function () {
-              sliderTrack.css("transition", "transform 0.5s ease");
-              moveSlider();
-            }, 50);
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                sliderTrack.css("transition", "transform 3s ease");
+                sliderTrack.css(
+                  "transform",
+                  `translateX(-${(100 / 3) * currentIndex}%)`
+                );
+              });
+            });
           } else {
             sliderTrack.css(
               "transform",
@@ -87,7 +92,7 @@
         }
 
         function startSlider() {
-          sliderInterval = setInterval(moveSlider, 2000);
+          sliderInterval = setInterval(moveSlider, 7000);
         }
 
         function stopSlider() {
