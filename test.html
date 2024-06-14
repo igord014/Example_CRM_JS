@@ -30,6 +30,7 @@
       .slider-track img {
         width: 33.3333%; /* Показываем 3 изображения одновременно */
         flex-shrink: 0; /* Запрещаем уменьшение ширины изображения */
+        cursor: pointer;
       }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -50,7 +51,6 @@
           "robotTwo.png",
           "robotIntree.png",
           "robotFour.png",
-         
         ];
 
         // Duplicate the images array to create a loop effect
@@ -61,6 +61,8 @@
         });
 
         let currentIndex = 0;
+        let sliderInterval;
+        let isPaused = false;
 
         function moveSlider() {
           currentIndex++;
@@ -80,7 +82,24 @@
           }
         }
 
-        setInterval(moveSlider, 2000); // Меняем изображение каждые 2 секунды
+        function startSlider() {
+          sliderInterval = setInterval(moveSlider, 2000);
+        }
+
+        function stopSlider() {
+          clearInterval(sliderInterval);
+        }
+
+        sliderTrack.on("click", function () {
+          if (isPaused) {
+            startSlider();
+          } else {
+            stopSlider();
+          }
+          isPaused = !isPaused;
+        });
+
+        startSlider(); // Start the slider initially
       });
     </script>
   </body>
