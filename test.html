@@ -24,7 +24,7 @@
 
       .slider-track {
         display: flex;
-        transition: transform 3s ease;
+        transition: transform 5s ease-in-out; /* Обновлено для плавного ускорения и замедления */
       }
 
       .slider-track img {
@@ -33,9 +33,9 @@
         cursor: pointer;
         box-sizing: border-box;
       }
-      
+
       img {
-        padding: 10px;
+        padding: 5px;
       }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -67,8 +67,12 @@
 
         let currentIndex = 0;
         let isPaused = false;
+        let isAnimating = false;
 
         function moveSlider() {
+          if (isAnimating) return;
+          isAnimating = true;
+
           currentIndex++;
           if (currentIndex >= images.length) {
             currentIndex = 0;
@@ -76,7 +80,7 @@
             sliderTrack.css("transform", "translateX(0)");
             requestAnimationFrame(() => {
               requestAnimationFrame(() => {
-                sliderTrack.css("transition", "transform 3s ease");
+                sliderTrack.css("transition", "transform 5s ease-in-out");
                 sliderTrack.css(
                   "transform",
                   `translateX(-${(100 / 3) * currentIndex}%)`
@@ -91,8 +95,12 @@
           }
         }
 
+        sliderTrack.on("transitionend", function () {
+          isAnimating = false;
+        });
+
         function startSlider() {
-          sliderInterval = setInterval(moveSlider, 7000);
+          sliderInterval = setInterval(moveSlider, 5000);
         }
 
         function stopSlider() {
